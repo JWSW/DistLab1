@@ -1,13 +1,12 @@
 package app.client;
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Functions {
+public class FunctionsClient {
     private static Socket socket;
     private static String hostName;
     private static int portNumber;
@@ -34,7 +33,7 @@ public class Functions {
                 }
                 catch (IOException ex)
                 {
-                    Logger.getLogger(Functions.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(FunctionsClient.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }.start();
@@ -48,7 +47,7 @@ public class Functions {
         }
         catch (IOException ex)
         {
-            Logger.getLogger(Functions.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FunctionsClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -84,8 +83,8 @@ public class Functions {
         }
         catch (IOException ex)
         {
-            Logger.getLogger(Functions.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FunctionsClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        reconnectToServer();
+        reconnectToServer();
     }
 }
