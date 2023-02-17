@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 public class FunctionsClient {
     private static Socket socket;
     private static String hostName;
-    private static int portNumber;
+    public static int portNumber;
 
     public static void connectToServer()
     {
