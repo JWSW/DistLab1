@@ -17,6 +17,9 @@ public class FunctionsServer
     private static ServerSocket server;
     private static Socket socket;
 
+    public FunctionsServer() {
+    }
+
     public static void startServer(int port)
     {
         try

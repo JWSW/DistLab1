@@ -11,6 +11,9 @@ public class FunctionsClient {
     private static String hostName;
     public static int portNumber;
 
+    public FunctionsClient() {
+    }
+
     public static void connectToServer()
     {
         Scanner sc = new Scanner(System.in);

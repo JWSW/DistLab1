@@ -1,5 +1,7 @@
 package app.client;
 
+import app.server.FunctionsServer;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -15,6 +17,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
+        FunctionsClient client = new FunctionsClient();
+        FunctionsServer server = new FunctionsServer();
+
+        client.connectToServer();
+        server.startServer(client.portNumber);
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Geef hostname: ");
