@@ -7,14 +7,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FunctionsClient {
-    private static Socket socket;
-    private static String hostName;
+    private Socket socket;
+    private String hostName;
     public static int portNumber;
 
     public FunctionsClient() {
     }
 
-    public static void connectToServer()
+    public void connectToServer()
     {
         Scanner sc = new Scanner(System.in);
 
@@ -23,26 +23,26 @@ public class FunctionsClient {
 
         System.out.println("Geef port: ");
         String port = sc.nextLine();
-        new Thread()
-        {
-            @Override
-            public void run()
+//        new Thread()
+//        {
+//            @Override
+//            public void run()
+//            {
+            try
             {
-                try
-                {
-                    hostName = hostname;
-                    portNumber = Integer.parseInt(port);
-                    socket = new Socket(hostname,Integer.parseInt(port));
-                }
-                catch (IOException ex)
-                {
-                    Logger.getLogger(FunctionsClient.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                hostName = hostname;
+                portNumber = Integer.parseInt(port);
+                socket = new Socket(hostName,portNumber);
             }
-        }.start();
-    }
+            catch (IOException ex)
+            {
+                Logger.getLogger(FunctionsClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+//        }.start();
+//    }
 
-    private static void reconnectToServer()
+    private void reconnectToServer()
     {
         try
         {
@@ -54,7 +54,7 @@ public class FunctionsClient {
         }
     }
 
-    public static void receiveFile(String outputFilePath)
+    public void receiveFile(String outputFilePath)
     {
         InputStream is;
         BufferedInputStream bis;
