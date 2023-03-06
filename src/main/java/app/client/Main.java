@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        FunctionsClient client = new FunctionsClient();
-        FunctionsServer server = new FunctionsServer();
-
-        client.connectToServer();
-        server.startServer(client.portNumber);
-        Scanner sc = new Scanner(System.in);
+//        FunctionsClient client = new FunctionsClient();
+//        FunctionsServer server = new FunctionsServer();
+//
+//        client.connectToServer();
+//        server.startServer(client.portNumber);
+//        Scanner sc = new Scanner(System.in);
 
 //        System.out.println("Geef hostname: ");
 //        String hostname = sc.nextLine();

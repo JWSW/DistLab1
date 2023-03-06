@@ -6,6 +6,7 @@ import java.net.*;
 public class TCPServer {
     public static void main(String[] args) throws Exception {
         ServerSocket serverSocket = new ServerSocket(2011);
+        serverSocket.setReuseAddress(true);
         System.out.println("Server listening on port 2011...");
 
         while (true) {
@@ -26,8 +27,6 @@ public class TCPServer {
         @Override
         public void run() {
             try {
-//                Socket socket = serverSocket.accept();
-//                System.out.println("Client connected: " + socket.getInetAddress().getHostAddress());
 
                 File file = new File("C:\\Users\\joshu\\Documents\\Level1.txt");
                 FileInputStream fis = new FileInputStream(file);
@@ -51,26 +50,10 @@ public class TCPServer {
                     os.write(contents);
                     System.out.println("Sending file ... " + (current*100)/fileLength + "% complete!");
                 }
-
-//        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-
-//        String inputLine, outputLine;
-//        while ((inputLine = in.readLine()) != null) {
-//            System.out.println("Received message from client: " + inputLine);
-//            outputLine = "Server received message: " + inputLine;
-//            out.println(outputLine);
-//            if (inputLine.equals("Bye."))
-//                break;
-//        }
-
-//        out.close();
-//        in.close();
         os.flush();
         bis.close();
         fis.close();
         clientSocket.close();
-//        serverSocket.close();
         System.out.println("File sent to client: " + clientSocket.getInetAddress().getHostAddress());
         } catch (IOException e) {
             e.printStackTrace();
