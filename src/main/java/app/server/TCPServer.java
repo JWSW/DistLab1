@@ -11,20 +11,46 @@ public class TCPServer {
         Socket socket = serverSocket.accept();
         System.out.println("Client connected: " + socket.getInetAddress().getHostAddress());
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        File file = new File("C:\\Users\\joshu\\Documents\\Level1.txt");
+        FileInputStream fis = new FileInputStream(file);
+        BufferedInputStream bis = new BufferedInputStream(fis);
 
-        String inputLine, outputLine;
-        while ((inputLine = in.readLine()) != null) {
-            System.out.println("Received message from client: " + inputLine);
-            outputLine = "Server received message: " + inputLine;
-            out.println(outputLine);
-            if (inputLine.equals("Bye."))
-                break;
+        OutputStream os = socket.getOutputStream();
+        byte[] contents;
+        long fileLength = file.length();
+        long current = 0;
+
+        while(current!=fileLength) {
+            int size = 10000;
+            if(fileLength - current >= size)
+                current += size;
+            else {
+                size = (int)(fileLength - current);
+                current = fileLength;
+            }
+            contents = new byte[size];
+            bis.read(contents, 0, size);
+            os.write(contents);
+            System.out.println("Sending file ... " + (current*100)/fileLength + "% complete!");
         }
 
-        out.close();
-        in.close();
+//        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+
+//        String inputLine, outputLine;
+//        while ((inputLine = in.readLine()) != null) {
+//            System.out.println("Received message from client: " + inputLine);
+//            outputLine = "Server received message: " + inputLine;
+//            out.println(outputLine);
+//            if (inputLine.equals("Bye."))
+//                break;
+//        }
+
+//        out.close();
+//        in.close();
+        os.flush();
+        bis.close();
+        fis.close();
         socket.close();
         serverSocket.close();
     }
